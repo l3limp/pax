@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "500724205369",
+    "project_id": "paxx-cd023",
+    "storage_bucket": "paxx-cd023.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:500724205369:android:8b4647cc7f90de4a054ae8",
+        "android_client_info": {
+          "package_name": "com.example.pax"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "500724205369-vk3pn827kmu8qhnb8acktsso0n0g36vh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwmNLQlFRsuvnhIUzpme-Km60x30Ike7E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "500724205369-vk3pn827kmu8qhnb8acktsso0n0g36vh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
