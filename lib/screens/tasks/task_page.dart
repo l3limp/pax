@@ -60,10 +60,11 @@ class _TasksPageState extends State<TasksPage> {
                     color: Colors.grey[800]),
                 height: _height * 0.35,
                 width: _width * 0.95,
-                child: const Center(
-                  child: Text(
-                    "Sample image about the acivity will come here",
-                    style: TextStyle(color: Colors.white, fontSize: 18.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15.0),
+                  child: Image.asset(
+                    "assets/images/${arguments["taskNumber"]}.jpg",
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
