@@ -57,7 +57,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Navigator.pushNamed(
                                       context, '/task_page', arguments: {
                                     'task': _tasks
-                                        .tasksList[snapshot.data!['taskNumber']]
+                                        .tasksList[snapshot.data!['taskNumber']],
+                                    'taskNumber': snapshot.data!['taskNumber']
                                   });
                                 },
                                 child: Text(_tasks
