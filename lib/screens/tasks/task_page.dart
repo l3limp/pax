@@ -24,10 +24,15 @@ class _TasksPageState extends State<TasksPage> {
               Text(arguments['task']),
               ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/post_page',
+                    Navigator.pushNamed(context, '/write_post',
                         arguments: {'task': arguments['task']});
                   },
-                  child: Text(arguments['task']))
+                  child: Text(arguments['task'])),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/posts');
+                  },
+                  child: Text("view posts"))
             ],
           )),
         ));

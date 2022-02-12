@@ -14,6 +14,7 @@ late Map arguments;
 OurTheme _theme = OurTheme();
 late User? _user;
 String postText = "";
+bool showName = false;
 
 class _WritePostState extends State<WritePost> {
   @override
@@ -40,7 +41,6 @@ class _WritePostState extends State<WritePost> {
                     width: width * 0.9,
                     height: height * 0.4,
                     child: TextFormField(
-                      initialValue: arguments['address'],
                       onChanged: (text) {
                         postText = text;
                       },
@@ -56,7 +56,7 @@ class _WritePostState extends State<WritePost> {
                       ),
                       cursorColor: _theme.secondaryColor,
                       style: TextStyle(
-                            color: _theme.primaryColor, letterSpacing: .5),
+                          color: _theme.primaryColor, letterSpacing: .5),
                     ),
                   ),
                 ),
@@ -79,8 +79,13 @@ class _WritePostState extends State<WritePost> {
 
   Future<void> _setPost() {
     CollectionReference _posts = FirebaseFirestore.instance.collection('posts');
-    print("post set");
-    return _posts.doc().set(
-        {'text': postText, 'timestamp': Timestamp.now(), 'uid': _user!.uid});
+    return _posts.doc().set({
+      'text': postText,
+      'timestamp': Timestamp.now(),
+      'uid': _user!.uid,
+      'activityName': arguments['task'],
+      'showName': showName,
+      'likes': 0
+    });
   }
 }
