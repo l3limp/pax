@@ -1,5 +1,10 @@
+import 'dart:math';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:pax/objects/google_links.dart';
+import 'package:pax/objects/tasks.dart';
 import 'package:pax/objects/youtube_vids.dart';
 import 'package:pax/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -14,18 +19,36 @@ class TasksPage extends StatefulWidget {
 late Map arguments;
 YoutubeVids _youtubeVids = YoutubeVids();
 GoogleLinks _googleLinks = GoogleLinks();
+Tasks _tasks = Tasks();
+late CollectionReference users;
+late FirebaseAuth _auth = FirebaseAuth.instance;
+late User? _user;
+Random _random = Random();
+late int taskNumber;
+bool tasknumberchecker = false;
 
 class _TasksPageState extends State<TasksPage> {
+  updateScreen(int number) {
+    setState(() {
+      taskNumber = number;
+      tasknumberchecker = !tasknumberchecker;
+    });
+  }
+
   final _theme = OurTheme();
   @override
   Widget build(BuildContext context) {
+    _auth = FirebaseAuth.instance;
+    _user = FirebaseAuth.instance.currentUser;
+    users = FirebaseFirestore.instance.collection('users');
     double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
     arguments = ModalRoute.of(context)!.settings.arguments as Map;
+    taskNumber = tasknumberchecker ? taskNumber : arguments['taskNumber'];
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.black),
+          iconTheme: const IconThemeData(color: Colors.black),
           title: Text(
             "Your Today's Activity",
             style: TextStyle(
@@ -46,7 +69,7 @@ class _TasksPageState extends State<TasksPage> {
               SizedBox(
                 width: _width * 0.9,
                 child: Text(
-                  arguments['task'],
+                  _tasks.tasksList[taskNumber],
                   style: TextStyle(
                       color: Colors.black,
                       fontFamily: _theme.font,
@@ -63,7 +86,7 @@ class _TasksPageState extends State<TasksPage> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15.0),
                   child: Image.asset(
-                    "assets/images/${arguments["taskNumber"]}.jpg",
+                    "assets/images/$taskNumber.jpg",
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -80,8 +103,7 @@ class _TasksPageState extends State<TasksPage> {
                 children: [
                   InkWell(
                     onTap: () async {
-                      if (!await launch(
-                          _youtubeVids.videoList[arguments['taskNumber']])) {
+                      if (!await launch(_youtubeVids.videoList[taskNumber])) {
                         throw 'Could not launch URL';
                       }
                     },
@@ -95,8 +117,7 @@ class _TasksPageState extends State<TasksPage> {
                   ),
                   InkWell(
                     onTap: () async {
-                      if (!await launch(
-                          _googleLinks.googleLinks[arguments['taskNumber']])) {
+                      if (!await launch(_googleLinks.googleLinks[taskNumber])) {
                         throw 'Could not launch URL';
                       }
                     },
@@ -114,15 +135,16 @@ class _TasksPageState extends State<TasksPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/post_page',
-                            arguments: {'task': arguments['task']});
+                      onPressed: () async {
+                        int number = _random.nextInt(6);
+                        await setTask(number);
+                        updateScreen(number);
                       },
                       child: const Text("Skip todays activity")),
                   ElevatedButton(
                       onPressed: () {
                         Navigator.pushNamed(context, '/post_page',
-                            arguments: {'task': arguments['task']});
+                            arguments: {'task': _tasks.tasksList[taskNumber]});
                       },
                       child: const Text("Post your activity")),
                 ],
@@ -130,5 +152,14 @@ class _TasksPageState extends State<TasksPage> {
             ],
           ),
         ));
+  }
+
+  Future<void> setTask(int number) async {
+    await users.doc(_user!.uid).get().then((value) async {
+      await users.doc(_user!.uid).update({
+        'taskNumber': number,
+        'taskDate': DateFormat('EEEEE', 'en_US').format(DateTime.now())
+      });
+    });
   }
 }
