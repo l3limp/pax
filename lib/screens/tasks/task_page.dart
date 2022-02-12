@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pax/objects/google_links.dart';
 import 'package:pax/objects/youtube_vids.dart';
 import 'package:pax/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -12,6 +13,7 @@ class TasksPage extends StatefulWidget {
 
 late Map arguments;
 YoutubeVids _youtubeVids = YoutubeVids();
+GoogleLinks _googleLinks = GoogleLinks();
 
 class _TasksPageState extends State<TasksPage> {
   final _theme = OurTheme();
@@ -77,8 +79,10 @@ class _TasksPageState extends State<TasksPage> {
                 children: [
                   InkWell(
                     onTap: () async {
-                      if (!await launch(_youtubeVids.videoList[arguments['taskNumber']]))
+                      if (!await launch(
+                          _youtubeVids.videoList[arguments['taskNumber']])) {
                         throw 'Could not launch URL';
+                      }
                     },
                     child: const Text(
                       'Click to see YT video',
@@ -88,12 +92,20 @@ class _TasksPageState extends State<TasksPage> {
                           fontWeight: FontWeight.w600),
                     ),
                   ),
-                  const Text(
-                    'Click to see loactions near you',
-                    style: TextStyle(
-                        color: Colors.blueAccent,
-                        fontSize: 15.0,
-                        fontWeight: FontWeight.w600),
+                  InkWell(
+                    onTap: () async {
+                      if (!await launch(
+                          _googleLinks.googleLinks[arguments['taskNumber']])) {
+                        throw 'Could not launch URL';
+                      }
+                    },
+                    child: const Text(
+                      'Click to see loactions near you',
+                      style: TextStyle(
+                          color: Colors.blueAccent,
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.w600),
+                    ),
                   )
                 ],
               ),
