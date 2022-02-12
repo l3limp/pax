@@ -10,6 +10,7 @@ class PostCard extends StatefulWidget {
   final String authorName;
   final bool showName;
   final String docID;
+  final String image;
 
   const PostCard(
       {Key? key,
@@ -18,7 +19,8 @@ class PostCard extends StatefulWidget {
       required this.likes,
       required this.authorName,
       required this.showName,
-      required this.docID})
+      required this.docID,
+      required this.image})
       : super(key: key);
 
   @override
@@ -55,6 +57,12 @@ class _PostCardState extends State<PostCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     mainAxisSize: MainAxisSize.min,
                     children: [
+                      widget.image == "a"
+                          ? SizedBox()
+                          : Container(
+                              height: 400,
+                              width: 300,
+                              child: Image.network(widget.image)),
                       _buildBookTitle(widget.postText),
                       if (!widget.showName)
                         _buildRichText("By: ", widget.authorName),

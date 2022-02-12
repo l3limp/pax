@@ -81,6 +81,7 @@ class _PostsPageState extends State<PostsPage> {
               likes: data['likes'],
               showName: data['showName'],
               docID: document.id,
+              image: data['image'],
             ),
           ],
         ),
