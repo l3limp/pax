@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:pax/theme.dart';
 
 class WritePost extends StatefulWidget {
@@ -56,10 +55,8 @@ class _WritePostState extends State<WritePost> {
                                 color: _theme.secondaryColor, width: 2)),
                       ),
                       cursorColor: _theme.secondaryColor,
-                      style: GoogleFonts.roboto(
-                        textStyle: TextStyle(
+                      style: TextStyle(
                             color: _theme.primaryColor, letterSpacing: .5),
-                      ),
                     ),
                   ),
                 ),

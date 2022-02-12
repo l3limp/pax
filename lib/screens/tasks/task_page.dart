@@ -15,7 +15,7 @@ class _TasksPageState extends State<TasksPage> {
     arguments = ModalRoute.of(context)!.settings.arguments as Map;
     return Scaffold(
         appBar: AppBar(
-          title: Text("task"),
+          title: const Text("task"),
         ),
         body: Center(
           child: Container(
