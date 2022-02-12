@@ -60,6 +60,18 @@ class _WritePostState extends State<WritePost> {
                     ),
                   ),
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Checkbox(
+                        value: showName,
+                        onChanged: (value) {
+                          showName = value!;
+                          setState(() {});
+                        }),
+                    const Text("post anonymously?"),
+                  ],
+                ),
                 ElevatedButton(
                     onPressed: () {
                       if (postText.isNotEmpty) {
@@ -80,13 +92,15 @@ class _WritePostState extends State<WritePost> {
 
   Future<void> _setPost() {
     CollectionReference _posts = FirebaseFirestore.instance.collection('posts');
+    final email = _user!.email.toString().split('@');
     return _posts.doc().set({
       'text': postText,
       'timestamp': Timestamp.now(),
-      'uid': _user!.uid,
+      'author': email[0],
       'activityName': arguments['task'],
       'showName': showName,
-      'likes': 0
+      'likes': 0,
+      'uid': _user!.uid
     });
   }
 }

@@ -56,7 +56,7 @@ class _PostCardState extends State<PostCard> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       _buildBookTitle(widget.postText),
-                      if (widget.showName)
+                      if (!widget.showName)
                         _buildRichText("By: ", widget.authorName),
                       _buildRichText("Likes: ", widget.likes.toString()),
                       LikeButton(onTap: onLikeButtonTapped),

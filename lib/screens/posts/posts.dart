@@ -68,6 +68,7 @@ class _PostsPageState extends State<PostsPage> {
   getBooks(AsyncSnapshot<QuerySnapshot> snapshot) {
     return snapshot.data!.docs.map((DocumentSnapshot document) {
       Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+
       return Padding(
         padding: const EdgeInsets.only(bottom: 3.0, top: 7.0),
         child: Column(
@@ -75,7 +76,7 @@ class _PostsPageState extends State<PostsPage> {
             Text(data['activityName']),
             PostCard(
               activityName: data['activityName'],
-              authorName: _user!.uid,
+              authorName: data['author'],
               postText: data['text'],
               likes: data['likes'],
               showName: data['showName'],
