@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:intl/intl.dart';
 import 'package:pax/theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -6,6 +9,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 late FirebaseAuth _firebaseAuth;
 late CollectionReference users;
+late String _email;
+late String _password;
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -16,8 +21,7 @@ class LoginPage extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     OurTheme _theme = OurTheme();
-    String _email = "";
-    String _password = "";
+
     return SafeArea(
       child: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
@@ -85,7 +89,7 @@ class LoginPage extends StatelessWidget {
                         ),
                         Container(
                           width: width * 0.5,
-                          child: TextFormField(
+                          child: TextField(
                             onChanged: (text) {
                               _password = text;
                             },
@@ -202,9 +206,12 @@ class LoginPage extends StatelessWidget {
   }
 
   Future<void> createUser(String password) {
+    Random _random = Random();
     return users
         .doc(_firebaseAuth.currentUser!.uid)
         .set({
+          'taskNumber': _random.nextInt(6),
+          'taskDate': DateFormat('EEEEE', 'en_US').format(DateTime.now()),
           'emailID': _firebaseAuth.currentUser!.email.toString(),
           'password': password,
         })

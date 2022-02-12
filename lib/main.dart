@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pax/init/initialisation.dart';
 import 'package:pax/screens/home.dart';
 import 'package:pax/screens/login.dart';
+import 'package:pax/screens/tasks/task_page.dart';
+import 'package:pax/screens/tasks/write_post.dart';
 
 void main() {
   runApp(
@@ -16,6 +18,8 @@ void main() {
         '/': (context) => const Initialising(),
         '/home': (context) => const HomeScreen(),
         '/login_page': (context) => const LoginPage(),
+        '/task_page': (context) => const TasksPage(),
+        '/post_page': (context) => const WritePost(),
       },
     ),
   );
