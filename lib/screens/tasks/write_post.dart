@@ -64,6 +64,7 @@ class _WritePostState extends State<WritePost> {
                     onPressed: () {
                       if (postText.isNotEmpty) {
                         _setPost();
+                        Navigator.popAndPushNamed(context, '/posts');
                       } else {
                         const snackBar =
                             SnackBar(content: Text('Post cannot be empty'));
