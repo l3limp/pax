@@ -5,7 +5,7 @@ import 'package:pax/theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 late FirebaseAuth _firebaseAuth;
 late CollectionReference users;
@@ -46,14 +46,12 @@ class LoginPage extends StatelessWidget {
                           width: width * 0.4,
                           child: Center(
                             child: Text("PAX",
-                                style: GoogleFonts.roboto(
-                                  textStyle: TextStyle(
+                                style: TextStyle(
                                       color: _theme.primaryColor,
                                       letterSpacing: .5,
                                       fontSize: 30),
                                 )),
                           ),
-                        ),
                         Container(
                           width: width * 0.5,
                           child: TextFormField(
@@ -76,11 +74,9 @@ class LoginPage extends StatelessWidget {
                                       width: 1.3)),
                             ),
                             cursorColor: _theme.secondaryColor,
-                            style: GoogleFonts.roboto(
-                              textStyle: TextStyle(
+                            style: TextStyle(
                                   color: _theme.primaryColor,
                                   letterSpacing: .5),
-                            ),
                             keyboardType: TextInputType.emailAddress,
                           ),
                         ),
@@ -109,11 +105,9 @@ class LoginPage extends StatelessWidget {
                                       width: 1.3)),
                             ),
                             cursorColor: _theme.secondaryColor,
-                            style: GoogleFonts.roboto(
-                              textStyle: TextStyle(
+                            style: TextStyle(
                                   color: _theme.primaryColor,
                                   letterSpacing: .5),
-                            ),
                             keyboardType: TextInputType.visiblePassword,
                           ),
                         ),
@@ -150,11 +144,9 @@ class LoginPage extends StatelessWidget {
                               child: Center(
                                 child: Text(
                                   "Sign In",
-                                  style: GoogleFonts.roboto(
-                                    textStyle: TextStyle(
+                                  style:  TextStyle(
                                         color: _theme.primaryColor,
                                         letterSpacing: .5),
-                                  ),
                                 ),
                               )),
                         ),
