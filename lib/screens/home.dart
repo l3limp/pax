@@ -44,10 +44,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.popAndPushNamed(context, '/login_page');
                 },
                 child: Container(
-                  width: _width * 0.22,
+                  padding: EdgeInsets.all(8),
+                  // width: _width * 0.22,
                   height: 25.0,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.0),
+                    borderRadius: BorderRadius.circular(10.0),
                     color: const Color(0xFFFF585C),
                   ),
                   child: const Center(
@@ -71,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
               if (snapshot.connectionState == ConnectionState.done) {
                 setTask();
                 return Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -79,6 +80,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       const Text(
                         "Welcome back,",
                         style: TextStyle(color: Colors.black, fontSize: 22.0),
+                      ),
+                      Spacer(
+                        flex: 1,
                       ),
                       Text(
                         _user!.email!.split("@")[0],
@@ -139,59 +143,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       const Spacer(
-                        flex: 3,
-                      ),
-                      InkWell(
-                        onTap: () {},
-                        child: Center(
-                          child: Container(
-                            width: _width * 0.9,
-                            height: _height * 0.17,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15.0),
-                                color: const Color(0xFF64A4DA)),
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: _width * 0.13,
-                                ),
-                                Image.asset("assets/images/running.png"),
-                                const SizedBox(
-                                  width: 5.0,
-                                ),
-                                const Text(
-                                  "999",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 19.0),
-                                ),
-                                SizedBox(
-                                  width: _width * 0.3,
-                                ),
-                                Image.asset("assets/images/sleeping.png"),
-                                const SizedBox(
-                                  width: 5.0,
-                                ),
-                                const Text(
-                                  "7 hr",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 19.0),
-                                ),
-                                SizedBox(
-                                  width: _width * 0.07,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      const Spacer(
-                        flex: 3,
+                        flex: 1,
                       ),
                       Row(
+
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           InkWell(
@@ -200,8 +155,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             },
                             child: Center(
                               child: Container(
-                                width: _width * 0.33,
-                                height: _height * 0.17,
+                                width: _width * 0.45,
+                                height: _height * 0.13,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15.0),
                                     color: const Color(0xFFE76A40)),
@@ -227,8 +182,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             },
                             child: Center(
                               child: Container(
-                                width: _width * 0.56,
-                                height: _height * 0.17,
+                                width: _width * 0.42,
+                                height: _height * 0.13,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15.0),
                                     color: const Color(0xFF8F98FD)),
@@ -252,6 +207,26 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                         ],
+                      ),
+                      const Spacer(
+                        flex: 1,
+                      ),
+                      InkWell(
+                          onTap: () {},
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Expanded(
+
+                                child: Image.asset('assets/images/mind.png',fit: BoxFit.contain,),
+                              ),
+                              Expanded(
+
+                                child: Image.asset('assets/images/sleep.png'),
+                              ),
+
+                            ],
+                          )
                       ),
                       const Spacer(
                         flex: 3,
