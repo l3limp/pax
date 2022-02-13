@@ -68,6 +68,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               },
             )),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/routines');
+                },
+                child: const Text("Go to routines page")),
             TextButton(
               child: const Text("pax sign out"),
               onPressed: () async {
