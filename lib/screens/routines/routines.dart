@@ -26,16 +26,23 @@ class _RoutinesState extends State<Routines> {
         .snapshots();
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
         onPressed: () {
           Navigator.pushNamed(context, '/addroutine');
         },
-        backgroundColor: Colors.cyan,
+        backgroundColor: const Color(0xFFFF585C),
       ),
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("Routines"),
-        centerTitle: true,
+        iconTheme: const IconThemeData(color: Colors.black),
+        title: const Text(
+          "To-do",
+          style: TextStyle(color: Colors.black),
+        ),
+        backgroundColor: Colors.white,
         elevation: 0.0,
       ),
       body: StreamBuilder(
@@ -56,7 +63,11 @@ class _RoutinesState extends State<Routines> {
   getRoutines(AsyncSnapshot<QuerySnapshot> snapshot) {
     return snapshot.data!.docs.map((DocumentSnapshot document) {
       Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
-      return CheckBoxList(routine: data['text'], date: data['timestamp'], documentID: document.id,);
+      return CheckBoxList(
+        routine: data['text'],
+        date: data['timestamp'],
+        documentID: document.id,
+      );
     }).toList();
   }
 }
