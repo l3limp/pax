@@ -233,12 +233,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Image.asset("assets/images/checklist.png"),
+                                    Image.asset(
+                                      "assets/images/checklist.png",
+                                      fit: BoxFit.cover,
+                                    ),
                                     const Text(
                                       "Checklist",
                                       style: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 15.0,
+                                          fontSize: 16.0,
                                           fontWeight: FontWeight.bold),
                                     )
                                   ],
