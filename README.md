@@ -35,4 +35,4 @@ Download the file from the given link :- https://drive.google.com/drive/folders/
 
 ## Screenshots of the app-
 
-<img src="https://imgur.com/a/Fyqfw2k.png">
+![Screenshot-1](https://github.com/Maverick-Wolf/python_projects/blob/master/Pax1.jpeg?raw=true)
