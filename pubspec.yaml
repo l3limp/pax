@@ -43,6 +43,7 @@ dependencies:
   youtube_api: ^1.0.4
   youtube_player_flutter: ^8.0.0
   flutter_staggered_animations: ^1.0.0
+  flutter_linkify: ^5.0.2
 
 dev_dependencies:
   flutter_lints: ^1.0.0

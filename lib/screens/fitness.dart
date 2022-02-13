@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_api/youtube_api.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
 
 class FitnessPage extends StatefulWidget {
   const FitnessPage({Key? key}) : super(key: key);
@@ -71,8 +72,8 @@ class _FitnessPageState extends State<FitnessPage> {
           ],
         ),
         child: Container(
-          margin: EdgeInsets.symmetric(vertical: 7.0),
-          padding: EdgeInsets.all(12.0),
+          margin: const EdgeInsets.symmetric(vertical: 7.0),
+          padding: const EdgeInsets.all(12.0),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -90,21 +91,27 @@ class _FitnessPageState extends State<FitnessPage> {
                     Text(
                       video.title.toString().substring(0, 25) + "...",
                       softWrap: true,
-                      style: TextStyle(color: Colors.black, fontSize: 16.0),
+                      style:
+                          const TextStyle(color: Colors.black, fontSize: 16.0),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(vertical: 3.0),
+                      padding: const EdgeInsets.symmetric(vertical: 3.0),
                       child: Text(
                         video.channelTitle,
                         softWrap: true,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.black, fontWeight: FontWeight.w600),
                       ),
                     ),
-                    Text(
-                      video.url,
-                      style: TextStyle(color: Colors.black),
-                      softWrap: true,
+                    Linkify(
+                      onOpen: (link) async {
+                        if (!await launch(link.url)) {
+                          throw 'Could not launch ${link.url}';
+                        }
+                      },
+                      text: video.url,
+                      style: const TextStyle(color: Colors.black),
+                      linkStyle: const TextStyle(color: Colors.blue),
                     ),
                   ],
                 ),
