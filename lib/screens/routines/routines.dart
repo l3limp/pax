@@ -12,6 +12,13 @@ class _RoutinesState extends State<Routines> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {
+          Navigator.pushNamed(context, '/addroutine');
+        },
+        backgroundColor: Colors.cyan,
+      ),
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text("Routines"),
