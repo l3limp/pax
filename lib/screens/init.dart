@@ -84,9 +84,6 @@ class _SplashScreenState extends State<SplashScreen>
                                       fontSize: 50.0),
                                 ),
                               ),
-                              Spacer(
-                                flex: 10,
-                              ),
                               SizedBox(
                                   width: 50.0,
                                   child: Image.asset(
