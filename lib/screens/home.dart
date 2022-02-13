@@ -36,40 +36,45 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Center(
                 child: FutureBuilder<DocumentSnapshot>(
-                  future: users.doc(FirebaseAuth.instance.currentUser!.uid).get(),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<DocumentSnapshot> snapshot) {
-                    if (snapshot.hasError) {
-                      return const Text("Something went wrong");
-                    }
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      setTask();
-                      return Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-                        child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                  color: _theme.secondaryColor,
-                                )),
-                            child: TextButton(
-                                onPressed: () {
-                                  Navigator.pushNamed(
-                                      context, '/task_page', arguments: {
+              future: users.doc(FirebaseAuth.instance.currentUser!.uid).get(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<DocumentSnapshot> snapshot) {
+                if (snapshot.hasError) {
+                  return const Text("Something went wrong");
+                }
+                if (snapshot.connectionState == ConnectionState.done) {
+                  setTask();
+                  return Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                    child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              color: _theme.secondaryColor,
+                            )),
+                        child: TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/task_page',
+                                  arguments: {
                                     'taskNumber': snapshot.data!['taskNumber']
                                   });
-                                },
-                                child: Text(_tasks
-                                    .tasksList[snapshot.data!['taskNumber']]))),
-                      );
-                    }
-                    return Center(
-                      child: CircularProgressIndicator(
-                        color: _theme.secondaryColor,
-                      ),
-                    );
-                  },
-                )),
+                            },
+                            child: Text(_tasks
+                                .tasksList[snapshot.data!['taskNumber']]))),
+                  );
+                }
+                return Center(
+                  child: CircularProgressIndicator(
+                    color: _theme.secondaryColor,
+                  ),
+                );
+              },
+            )),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/routines');
+                },
+                child: const Text("Go to routines page")),
             TextButton(
               child: const Text("pax sign out"),
               onPressed: () async {
