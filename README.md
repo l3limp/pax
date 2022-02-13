@@ -34,3 +34,5 @@ Pax uses a number of open source projects to work properly:
 Download the file from the given link :- https://drive.google.com/drive/folders/11MjCpFPWqbO_QsFl0EqrcOiqVq02XcXP
 
 ## Screenshots of the app-
+
+<img src="https://imgur.com/a/Fyqfw2k.png"s>
