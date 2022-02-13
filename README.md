@@ -35,4 +35,4 @@ Download the file from the given link :- https://drive.google.com/drive/folders/
 
 ## Screenshots of the app-
 
-<img src="https://imgur.com/a/Fyqfw2k.png"s>
+<img src="https://imgur.com/a/Fyqfw2k.png">
