@@ -35,13 +35,13 @@ class _WritePostState extends State<WritePost> {
       child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
-            iconTheme: const IconThemeData(color: Colors.redAccent),
+            iconTheme: const IconThemeData(color: Colors.black),
             backgroundColor: Colors.white,
             elevation: 0,
             title: const Text(
               "Create a post",
               style: TextStyle(
-                  color: Colors.redAccent,
+                  color: Colors.black,
                   fontWeight: FontWeight.w500,
                   fontSize: 22.0,
                   letterSpacing: 1),

@@ -34,7 +34,6 @@ class _TasksPageState extends State<TasksPage> {
     });
   }
 
-  final _theme = OurTheme();
   @override
   Widget build(BuildContext context) {
     _user = FirebaseAuth.instance.currentUser;
@@ -70,24 +69,23 @@ class _TasksPageState extends State<TasksPage> {
                   child: Container(
                     decoration: BoxDecoration(
                       color: const Color(0xFFFF585c),
-                      borderRadius: BorderRadius.circular(15.0),
+                      borderRadius: BorderRadius.circular(5.0),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: const [
                         Text(
                           "Skip",
-                          style: TextStyle(color: Colors.white, fontSize: 20.0),
+                          style: TextStyle(color: Colors.white, fontSize: 14.0),
                         ),
                         Icon(
                           Icons.arrow_right,
                           color: Colors.white,
-                          size: 30.0,
+                          size: 25.0,
                         ),
                       ],
                     ),
-                    width: _width * 0.22,
-                    height: 25.0,
+                    width: _width * 0.19,
                   ),
                 ),
               ),
