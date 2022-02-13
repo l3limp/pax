@@ -23,15 +23,16 @@ Pax uses a number of open source projects to work properly:
 - Flutter - Flutter is an open-source UI software development kit created by Google
 - Firebase- Provides Backend Services for Applications
 
+## Installing the App on your Device
+
+Download the apk file from the given link and install the app on your android mobile:- https://drive.google.com/drive/folders/11MjCpFPWqbO_QsFl0EqrcOiqVq02XcXP
+
 
 ## Setting up the project
 
 1.Use the command promopt on windows or Terminal on Linux and use `git add` and  paste the link 'https://github.com/l3limp/pax.git'.
 2.Create a new branch and start working on it.
 
-## Installing the App on your Device
-
-Download the file from the given link :- https://drive.google.com/drive/folders/11MjCpFPWqbO_QsFl0EqrcOiqVq02XcXP
 
 ## Screenshots of the app-
 
