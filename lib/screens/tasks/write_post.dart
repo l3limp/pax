@@ -1,6 +1,12 @@
+import 'dart:io';
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
+import 'package:flutter_native_image/flutter_native_image.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pax/theme.dart';
 
 class WritePost extends StatefulWidget {
@@ -15,8 +21,12 @@ OurTheme _theme = OurTheme();
 late User? _user;
 String postText = "";
 bool showName = false;
+String imageLocation = "a";
+firebase_storage.FirebaseStorage storage =
+    firebase_storage.FirebaseStorage.instance;
 
 class _WritePostState extends State<WritePost> {
+  File? image;
   @override
   Widget build(BuildContext context) {
     _user = FirebaseAuth.instance.currentUser;
@@ -60,32 +70,80 @@ class _WritePostState extends State<WritePost> {
                     ),
                   ),
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Checkbox(
+                        value: showName,
+                        onChanged: (value) {
+                          showName = value!;
+                          setState(() {});
+                        }),
+                    const Text("post anonymously?"),
+                  ],
+                ),
                 ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      imageLocation = await uploadPic();
+                    },
+                    child: const Text("upload image")),
+                ElevatedButton(
+                    onPressed: () async {
                       if (postText.isNotEmpty) {
+                        await Future.delayed(const Duration(seconds: 2));
                         _setPost();
+                        Navigator.popAndPushNamed(context, '/posts');
                       } else {
                         const snackBar =
                             SnackBar(content: Text('Post cannot be empty'));
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       }
                     },
-                    child: const Text("post"))
+                    child: const Text("post")),
               ],
             )),
           )),
     );
   }
 
+  Future<String> uploadPic() async {
+    //Get the file from the image picker and store it
+    Random _random = Random();
+    int num = _random.nextInt(99999);
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    final imageTemp = File(image!.path);
+    this.image = imageTemp;
+    try {
+      await firebase_storage.FirebaseStorage.instance
+          .ref('uploads')
+          .child(num.toString() + ".png")
+          .putFile(imageTemp);
+    } on FirebaseException catch (e) {
+      print(e);
+    }
+
+    // Waits till the file is uploaded then stores the download url
+    String url = await firebase_storage.FirebaseStorage.instance
+        .ref('uploads')
+        .child(num.toString() + ".png")
+        .getDownloadURL();
+
+    //returns the download url
+    return url;
+  }
+
   Future<void> _setPost() {
     CollectionReference _posts = FirebaseFirestore.instance.collection('posts');
+    final email = _user!.email.toString().split('@');
     return _posts.doc().set({
       'text': postText,
       'timestamp': Timestamp.now(),
-      'uid': _user!.uid,
+      'author': email[0],
       'activityName': arguments['task'],
       'showName': showName,
-      'likes': 0
+      'likes': 0,
+      'uid': _user!.uid,
+      'image': imageLocation
     });
   }
 }

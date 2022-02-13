@@ -143,7 +143,7 @@ class _TasksPageState extends State<TasksPage> {
                       child: const Text("Skip todays activity")),
                   ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, '/post_page',
+                        Navigator.pushNamed(context, '/write_post',
                             arguments: {'task': _tasks.tasksList[taskNumber]});
                       },
                       child: const Text("Post your activity")),

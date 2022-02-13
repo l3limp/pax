@@ -22,8 +22,6 @@ Tasks _tasks = Tasks();
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    double _height = MediaQuery.of(context).size.height;
-    double _width = MediaQuery.of(context).size.width;
     _auth = FirebaseAuth.instance;
     _user = FirebaseAuth.instance.currentUser;
     users = FirebaseFirestore.instance.collection('users');
@@ -81,6 +79,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 await _auth.signOut();
                 Navigator.popAndPushNamed(context, '/login_page');
               },
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+              child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        color: _theme.secondaryColor,
+                      )),
+                  child: TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          '/posts',
+                        );
+                      },
+                      child: Text("posts"))),
             ),
           ],
         ),

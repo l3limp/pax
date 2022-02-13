@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:like_button/like_button.dart';
 import 'package:pax/theme.dart';
 
 class PostCard extends StatefulWidget {
@@ -7,6 +9,8 @@ class PostCard extends StatefulWidget {
   final int likes;
   final String authorName;
   final bool showName;
+  final String docID;
+  final String image;
 
   const PostCard(
       {Key? key,
@@ -14,7 +18,9 @@ class PostCard extends StatefulWidget {
       required this.postText,
       required this.likes,
       required this.authorName,
-      required this.showName})
+      required this.showName,
+      required this.docID,
+      required this.image})
       : super(key: key);
 
   @override
@@ -51,10 +57,17 @@ class _PostCardState extends State<PostCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     mainAxisSize: MainAxisSize.min,
                     children: [
+                      widget.image == "a"
+                          ? SizedBox()
+                          : Container(
+                              height: 400,
+                              width: 300,
+                              child: Image.network(widget.image)),
                       _buildBookTitle(widget.postText),
-                      if (widget.showName)
+                      if (!widget.showName)
                         _buildRichText("By: ", widget.authorName),
                       _buildRichText("Likes: ", widget.likes.toString()),
+                      LikeButton(onTap: onLikeButtonTapped),
                     ],
                   ),
                 )),
@@ -63,6 +76,25 @@ class _PostCardState extends State<PostCard> {
       ),
       onTap: () {},
     );
+  }
+
+  Future<bool> onLikeButtonTapped(bool isLiked) async {
+    isLiked ? await decreaseLikes() : await increaseLikes();
+    return !isLiked;
+  }
+
+  increaseLikes() async {
+    await FirebaseFirestore.instance
+        .collection('posts')
+        .doc(widget.docID)
+        .update({'likes': widget.likes + 1});
+  }
+
+  decreaseLikes() async {
+    await FirebaseFirestore.instance
+        .collection('posts')
+        .doc(widget.docID)
+        .update({'likes': widget.likes - 1});
   }
 
   Widget _buildBookTitle(String bookTitle) {
