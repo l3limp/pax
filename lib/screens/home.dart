@@ -117,7 +117,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context, '/fitness');
+                        },
                         child: Center(
                           child: Container(
                             width: _width * 0.9,

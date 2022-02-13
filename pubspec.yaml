@@ -40,6 +40,8 @@ dependencies:
   flutter:
     sdk: flutter
   intl: ^0.17.0
+  youtube_api: ^1.0.4
+  youtube_player_flutter: ^8.0.0
 
 dev_dependencies:
   flutter_lints: ^1.0.0
