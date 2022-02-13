@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pax/init/initialisation.dart';
+import 'package:pax/screens/fitness.dart';
 import 'package:pax/screens/home.dart';
 import 'package:pax/screens/init.dart';
 import 'package:pax/screens/login.dart';
@@ -28,6 +29,7 @@ void main() {
         '/posts': (context) => const PostsPage(),
         '/routines': (context) => const Routines(),
         '/addroutine': (context) => const AddRoutine(),
+        '/fitness': (context) => const FitnessPage(),
         '/': (context) => const SplashScreen(),
       },
     ),

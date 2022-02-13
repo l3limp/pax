@@ -188,6 +188,19 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/fitness');
+                        },
+                        child: Center(
+                          child: Container(
+                            width: _width * 0.9,
+                            height: _height * 0.15,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                color: const Color(0xFFE76A40)),
+                          ),
+                        ),
                       const Spacer(
                         flex: 3,
                       ),
