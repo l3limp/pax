@@ -73,9 +73,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 return Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      const Spacer(),
                       const Text(
                         "Welcome back,",
                         style: TextStyle(color: Colors.black, fontSize: 22.0),
@@ -87,6 +87,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             fontSize: 35.0,
                             fontWeight: FontWeight.w600),
                       ),
+                      const Spacer(
+                        flex: 3,
+                      ),
                       InkWell(
                         onTap: () {
                           Navigator.pushNamed(context, '/task_page',
@@ -97,22 +100,91 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Center(
                           child: Container(
                             width: _width * 0.9,
-                            height: _height * 0.15,
+                            height: _height * 0.17,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15.0),
                                 color: const Color(0xFFFE8180)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Image.asset("assets/images/activity.png"),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Text(
+                                      "Activity of the Day",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 21.0),
+                                    ),
+                                    SizedBox(
+                                      width: _width * 0.4,
+                                      child: Center(
+                                        child: Text(
+                                          _tasks.tasksList[
+                                              snapshot.data!['taskNumber']],
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 12.0),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
+                      ),
+                      const Spacer(
+                        flex: 3,
                       ),
                       InkWell(
                         onTap: () {},
                         child: Center(
                           child: Container(
                             width: _width * 0.9,
-                            height: _height * 0.15,
+                            height: _height * 0.17,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15.0),
                                 color: const Color(0xFF64A4DA)),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: _width * 0.13,
+                                ),
+                                Image.asset("assets/images/running.png"),
+                                const SizedBox(
+                                  width: 5.0,
+                                ),
+                                const Text(
+                                  "999",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 19.0),
+                                ),
+                                SizedBox(
+                                  width: _width * 0.3,
+                                ),
+                                Image.asset("assets/images/sleeping.png"),
+                                const SizedBox(
+                                  width: 5.0,
+                                ),
+                                const Text(
+                                  "7 hr",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 19.0),
+                                ),
+                                SizedBox(
+                                  width: _width * 0.07,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -129,27 +201,80 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: const Color(0xFFE76A40)),
                           ),
                         ),
+                      const Spacer(
+                        flex: 3,
                       ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, '/routines');
-                        },
-                        child: Center(
-                          child: Container(
-                            width: _width * 0.9,
-                            height: _height * 0.15,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15.0),
-                                color: const Color(0xFF8F98FD)),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          InkWell(
+                            onTap: () {},
+                            child: Center(
+                              child: Container(
+                                width: _width * 0.33,
+                                height: _height * 0.17,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                    color: const Color(0xFFE76A40)),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset("assets/images/fitness.png"),
+                                    const Text(
+                                      "Fitness",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16.0),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(context, '/routines');
+                            },
+                            child: Center(
+                              child: Container(
+                                width: _width * 0.56,
+                                height: _height * 0.17,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                    color: const Color(0xFF8F98FD)),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      "assets/images/checklist.png",
+                                      fit: BoxFit.cover,
+                                    ),
+                                    const Text(
+                                      "Checklist",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16.0,
+                                          fontWeight: FontWeight.bold),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Spacer(
+                        flex: 3,
                       ),
                     ],
                   ),
                 );
               }
-              return CircularProgressIndicator(
-                color: _theme.secondaryColor,
+              return Center(
+                child: CircularProgressIndicator(
+                  color: _theme.secondaryColor,
+                ),
               );
             }),
       ),

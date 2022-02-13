@@ -27,17 +27,20 @@ class _CheckBoxListState extends State<CheckBoxList> {
     return Padding(
       padding: const EdgeInsets.fromLTRB(8.0, 10.0, 8.0, 10.0),
       child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.redAccent),
-          borderRadius: BorderRadius.circular(15.0),
-        ),
+        decoration: BoxDecoration(boxShadow: const [
+          BoxShadow(
+              color: Colors.black45, blurRadius: 2, offset: Offset(1.5, 3)),
+        ], borderRadius: BorderRadius.circular(15.0), color: Colors.white),
         child: Theme(
-          data: ThemeData(unselectedWidgetColor: Colors.black),
+          data: ThemeData(unselectedWidgetColor: const Color(0xFFFF585c)),
           child: CheckboxListTile(
             controlAffinity: ListTileControlAffinity.leading,
             title: Text(
               widget.routine,
-              style: const TextStyle(color: Colors.black),
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16.0),
             ),
             subtitle: Text(
               widget.date,

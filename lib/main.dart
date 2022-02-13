@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pax/init/initialisation.dart';
 import 'package:pax/screens/fitness.dart';
 import 'package:pax/screens/home.dart';
+import 'package:pax/screens/init.dart';
 import 'package:pax/screens/login.dart';
 import 'package:pax/screens/main_home.dart';
 import 'package:pax/screens/posts/posts.dart';
@@ -20,7 +21,7 @@ void main() {
       ),
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (context) => const Initialising(),
+        '/init': (context) => const Initialising(),
         '/home': (context) => const MainHome(),
         '/login_page': (context) => const LoginPage(),
         '/task_page': (context) => const TasksPage(),
@@ -29,6 +30,7 @@ void main() {
         '/routines': (context) => const Routines(),
         '/addroutine': (context) => const AddRoutine(),
         '/fitness': (context) => const FitnessPage(),
+        '/': (context) => const SplashScreen(),
       },
     ),
   );
