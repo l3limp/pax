@@ -122,9 +122,9 @@ class _TasksPageState extends State<TasksPage> {
                 ),
                 SizedBox(
                   width: _width * 0.9,
-                  child: const Text(
-                    "Here some brief description about the activity will come\nBla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla",
-                    style: TextStyle(color: Colors.black, fontSize: 20.0),
+                  child: Text(
+                    _tasks.tasksDescription[taskNumber],
+                    style: const TextStyle(color: Colors.black, fontSize: 20.0),
                   ),
                 ),
                 InkWell(
