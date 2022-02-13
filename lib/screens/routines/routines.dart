@@ -56,7 +56,7 @@ class _RoutinesState extends State<Routines> {
   getRoutines(AsyncSnapshot<QuerySnapshot> snapshot) {
     return snapshot.data!.docs.map((DocumentSnapshot document) {
       Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
-      return CheckBoxList(routine: data['text'], date: data['timestamp']);
+      return CheckBoxList(routine: data['text'], date: data['timestamp'], documentID: document.id,);
     }).toList();
   }
 }
