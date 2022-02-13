@@ -62,7 +62,7 @@ class _TasksPageState extends State<TasksPage> {
                 padding: const EdgeInsets.all(7.0),
                 child: InkWell(
                   onTap: () async {
-                    int number = _random.nextInt(7);
+                    int number = _random.nextInt(9);
                     await setTask(number);
                     updateScreen(number);
                   },
