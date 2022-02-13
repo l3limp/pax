@@ -6,7 +6,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-
 late FirebaseAuth _firebaseAuth;
 late CollectionReference users;
 late String _email;
@@ -45,13 +44,14 @@ class LoginPage extends StatelessWidget {
                           height: height * 0.15,
                           width: width * 0.4,
                           child: Center(
-                            child: Text("PAX",
-                                style: TextStyle(
-                                      color: _theme.primaryColor,
-                                      letterSpacing: .5,
-                                      fontSize: 30),
-                                )),
-                          ),
+                              child: Text(
+                            "PAX",
+                            style: TextStyle(
+                                color: _theme.primaryColor,
+                                letterSpacing: .5,
+                                fontSize: 30),
+                          )),
+                        ),
                         Container(
                           width: width * 0.5,
                           child: TextFormField(
@@ -75,8 +75,7 @@ class LoginPage extends StatelessWidget {
                             ),
                             cursorColor: _theme.secondaryColor,
                             style: TextStyle(
-                                  color: _theme.primaryColor,
-                                  letterSpacing: .5),
+                                color: _theme.primaryColor, letterSpacing: .5),
                             keyboardType: TextInputType.emailAddress,
                           ),
                         ),
@@ -89,6 +88,7 @@ class LoginPage extends StatelessWidget {
                             onChanged: (text) {
                               _password = text;
                             },
+                            obscureText: true,
                             decoration: InputDecoration(
                               border: const OutlineInputBorder(),
                               labelText: "Password",
@@ -106,8 +106,7 @@ class LoginPage extends StatelessWidget {
                             ),
                             cursorColor: _theme.secondaryColor,
                             style: TextStyle(
-                                  color: _theme.primaryColor,
-                                  letterSpacing: .5),
+                                color: _theme.primaryColor, letterSpacing: .5),
                             keyboardType: TextInputType.visiblePassword,
                           ),
                         ),
@@ -144,9 +143,9 @@ class LoginPage extends StatelessWidget {
                               child: Center(
                                 child: Text(
                                   "Sign In",
-                                  style:  TextStyle(
-                                        color: _theme.primaryColor,
-                                        letterSpacing: .5),
+                                  style: TextStyle(
+                                      color: _theme.primaryColor,
+                                      letterSpacing: .5),
                                 ),
                               )),
                         ),

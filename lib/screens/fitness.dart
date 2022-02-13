@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:youtube_api/youtube_api.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-
 class FitnessPage extends StatefulWidget {
   const FitnessPage({Key? key}) : super(key: key);
 
@@ -11,54 +10,43 @@ class FitnessPage extends StatefulWidget {
 }
 
 class _FitnessPageState extends State<FitnessPage> {
-
   @override
   void initState() {
     super.initState();
     callAPI();
-    print('hello');
   }
 
   static String key = 'AIzaSyDRNZto4IJUDroHRi1F-v8oNj0r4wMDjz0';
-  YoutubeAPI youtube = new YoutubeAPI(key, maxResults: 25);
+  YoutubeAPI youtube = YoutubeAPI(key, maxResults: 25);
   List<YouTubeVideo> videoResult = [];
-
 
   String query = "Motivation Fitness";
 
-
   List videoList = [];
-
-
-
 
   @override
   Widget build(BuildContext context) {
-
-    print(videoList);
     return Scaffold(
-       backgroundColor: Colors.white,
-        appBar: AppBar(
-          iconTheme: const IconThemeData(
-            color: Color(0xFFFE8180)
-          ),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          title: const Text(
-            "Daily Dose of Fitness",
-            style: TextStyle(
-                color: Color(0xFFFE8180),
-                fontWeight: FontWeight.w500,
-                fontSize: 22.0,
-                letterSpacing: 1.2),
-          ),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.black),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: const Text(
+          "Daily Dose of Fitness",
+          style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+              fontSize: 22.0,
+              letterSpacing: 1.2),
         ),
+      ),
       body: ListView(
-    children: videoResult.map<Widget>(listItem).toList(),
-    ),
-
+        children: videoResult.map<Widget>(listItem).toList(),
+      ),
     );
   }
+
   Future<void> callAPI() async {
     String query = "Motivational Fitness";
     videoResult = await youtube.search(
@@ -74,11 +62,14 @@ class _FitnessPageState extends State<FitnessPage> {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
-        decoration: BoxDecoration(color: Colors.white,
+        decoration: BoxDecoration(
+          color: Colors.white,
           borderRadius: BorderRadius.circular(15),
           boxShadow: const [
-            BoxShadow(color: Colors.black45, blurRadius: 2, offset: Offset(1, 2)),
-          ],),
+            BoxShadow(
+                color: Colors.black45, blurRadius: 2, offset: Offset(1, 2)),
+          ],
+        ),
         child: Container(
           margin: EdgeInsets.symmetric(vertical: 7.0),
           padding: EdgeInsets.all(12.0),
@@ -97,18 +88,17 @@ class _FitnessPageState extends State<FitnessPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      video.title.toString().substring(0,25)+ "...",
+                      video.title.toString().substring(0, 25) + "...",
                       softWrap: true,
-                      style: TextStyle(color: Colors.black,fontSize: 16.0),
-
+                      style: TextStyle(color: Colors.black, fontSize: 16.0),
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 3.0),
                       child: Text(
-
                         video.channelTitle,
                         softWrap: true,
-                        style: TextStyle(color: Colors.black,fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w600),
                       ),
                     ),
                     Text(

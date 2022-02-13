@@ -46,6 +46,10 @@ class _TasksPageState extends State<TasksPage> {
       child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back, color: Colors.black),
+              onPressed: () => Navigator.pushReplacementNamed(context, '/home'),
+            ),
             iconTheme: const IconThemeData(color: Colors.black),
             title: const Text(
               "Activity of the Day",

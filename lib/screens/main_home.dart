@@ -38,7 +38,7 @@ class _MainHomeState extends State<MainHome> {
         backgroundColor: Colors.white,
         onTap: (index) {
           _pageController.animateToPage(index,
-              duration: const Duration(milliseconds: 450),
+              duration: const Duration(milliseconds: 250),
               curve: Curves.linear);
           setState(() {
             _selectedIndex = index;

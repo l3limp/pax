@@ -100,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.pushNamed(context, '/task_page',
+                          Navigator.pushReplacementNamed(context, '/task_page',
                               arguments: {
                                 'taskNumber': snapshot.data!['taskNumber']
                               });

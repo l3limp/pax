@@ -17,20 +17,20 @@ class _PostsPageState extends State<PostsPage> {
   Widget build(BuildContext context) {
     _postsStream = FirebaseFirestore.instance
         .collection('posts')
-        .orderBy('timestamp', descending: false)
+        .orderBy('timestamp', descending: true)
         .snapshots();
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
           iconTheme: const IconThemeData(
-            color: Colors.red,
+            color: Colors.black,
           ),
           backgroundColor: Colors.transparent,
           elevation: 0,
           title: const Text(
             "Community",
             style: TextStyle(
-              color: Colors.red,
+              color: Colors.black,
               fontWeight: FontWeight.bold,
             ),
           ),

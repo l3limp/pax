@@ -63,67 +63,38 @@ class _SplashScreenState extends State<SplashScreen>
                       height: MediaQuery.of(context).size.height,
                       width: MediaQuery.of(context).size.width * 0.6,
                       color: Colors.white,
-                      child: SingleChildScrollView(
+                      child: AnimationLimiter(
                         child: Column(
-                          children: [
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.55,
-                              child: AnimationLimiter(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children:
-                                      AnimationConfiguration.toStaggeredList(
-                                    duration:
-                                        const Duration(milliseconds: 1200),
-                                    childAnimationBuilder: (widget) =>
-                                        SlideAnimation(
-                                      horizontalOffset: -50.0,
-                                      child: FadeInAnimation(
-                                        child: widget,
-                                      ),
-                                    ),
-                                    children: [
-                                      Text(
-                                        "HAVE\n",
-                                        style: TextStyle(
-                                            color: _theme.primaryColor,
-                                            letterSpacing: .5,
-                                            fontSize: 30),
-                                      ),
-                                      Text(
-                                        "CRAX\n",
-                                        style: TextStyle(
-                                            color: _theme.primaryColor,
-                                            letterSpacing: .5,
-                                            fontSize: 30),
-                                      ),
-                                      Text(
-                                        "WITH\n",
-                                        style: TextStyle(
-                                            color: _theme.primaryColor,
-                                            letterSpacing: .5,
-                                            fontSize: 30),
-                                      ),
-                                      SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.4,
-                                        child: Center(
-                                          child: Text(
-                                            "PAX\n",
-                                            style: TextStyle(
-                                                color: _theme.primaryColor,
-                                                letterSpacing: .5,
-                                                fontSize: 30),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: AnimationConfiguration.toStaggeredList(
+                            duration: const Duration(milliseconds: 1200),
+                            childAnimationBuilder: (widget) => SlideAnimation(
+                              horizontalOffset: -50.0,
+                              child: FadeInAnimation(
+                                child: widget,
                               ),
                             ),
-                          ],
+                            children: [
+                              Center(
+                                child: Text(
+                                  "PAX\n",
+                                  style: TextStyle(
+                                      color: _theme.primaryColor,
+                                      letterSpacing: .5,
+                                      fontSize: 50.0),
+                                ),
+                              ),
+                              Spacer(
+                                flex: 10,
+                              ),
+                              SizedBox(
+                                  width: 50.0,
+                                  child: Image.asset(
+                                    'assets/images/xlogo.png',
+                                    fit: BoxFit.cover,
+                                  )),
+                            ],
+                          ),
                         ),
                       )),
                   SlideTransition(
