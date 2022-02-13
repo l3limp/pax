@@ -40,68 +40,80 @@ class _WritePostState extends State<WritePost> {
             title: const Text("post"),
           ),
           body: Center(
-            child: Container(
-                child: Column(
-              children: [
-                Text("task: " + arguments['task']),
-                Padding(
-                  padding:
-                      EdgeInsets.fromLTRB(width * 0.05, 10, width * 0.05, 25),
-                  child: SizedBox(
-                    width: width * 0.9,
-                    height: height * 0.4,
-                    child: TextFormField(
-                      onChanged: (text) {
-                        postText = text;
-                      },
-                      maxLines: 21,
-                      decoration: InputDecoration(
-                        border: const OutlineInputBorder(),
-                        labelStyle: TextStyle(color: _theme.secondaryColor),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: _theme.primaryColor)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: _theme.secondaryColor, width: 2)),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Text("task: " + arguments['task']),
+                  Padding(
+                    padding:
+                        EdgeInsets.fromLTRB(width * 0.05, 10, width * 0.05, 25),
+                    child: SizedBox(
+                        width: width * 0.9,
+                        height: height * 0.2,
+                        child: image != null
+                            ? Image.file(image!)
+                            : const SizedBox()),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsets.fromLTRB(width * 0.05, 10, width * 0.05, 25),
+                    child: SizedBox(
+                      width: width * 0.9,
+                      height: height * 0.2,
+                      child: TextFormField(
+                        onChanged: (text) {
+                          postText = text;
+                        },
+                        maxLines: 21,
+                        decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          labelStyle: TextStyle(color: _theme.secondaryColor),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: _theme.primaryColor)),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: _theme.secondaryColor, width: 2)),
+                        ),
+                        cursorColor: _theme.secondaryColor,
+                        style: TextStyle(
+                            color: _theme.primaryColor, letterSpacing: .5),
                       ),
-                      cursorColor: _theme.secondaryColor,
-                      style: TextStyle(
-                          color: _theme.primaryColor, letterSpacing: .5),
                     ),
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Checkbox(
-                        value: showName,
-                        onChanged: (value) {
-                          showName = value!;
-                          setState(() {});
-                        }),
-                    const Text("post anonymously?"),
-                  ],
-                ),
-                ElevatedButton(
-                    onPressed: () async {
-                      imageLocation = await uploadPic();
-                    },
-                    child: const Text("upload image")),
-                ElevatedButton(
-                    onPressed: () async {
-                      if (postText.isNotEmpty) {
-                        await Future.delayed(const Duration(seconds: 2));
-                        _setPost();
-                        Navigator.popAndPushNamed(context, '/posts');
-                      } else {
-                        const snackBar =
-                            SnackBar(content: Text('Post cannot be empty'));
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      }
-                    },
-                    child: const Text("post")),
-              ],
-            )),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Checkbox(
+                          value: showName,
+                          onChanged: (value) {
+                            showName = value!;
+                            setState(() {});
+                          }),
+                      const Text("post anonymously?"),
+                    ],
+                  ),
+                  ElevatedButton(
+                      onPressed: () async {
+                        imageLocation = await uploadPic();
+                      },
+                      child: const Text("upload image")),
+                  ElevatedButton(
+                      onPressed: () async {
+                        if (postText.isNotEmpty) {
+                          await Future.delayed(const Duration(seconds: 2));
+                          _setPost();
+                          Navigator.popAndPushNamed(context, '/posts');
+                        } else {
+                          const snackBar =
+                              SnackBar(content: Text('Post cannot be empty'));
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
+                      },
+                      child: const Text("post")),
+                ],
+              ),
+            ),
           )),
     );
   }
@@ -112,7 +124,10 @@ class _WritePostState extends State<WritePost> {
     int num = _random.nextInt(99999);
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
     final imageTemp = File(image!.path);
-    this.image = imageTemp;
+    setState(() {
+      this.image = imageTemp;
+    });
+
     try {
       await firebase_storage.FirebaseStorage.instance
           .ref('uploads')

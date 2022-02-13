@@ -34,47 +34,65 @@ class _PostCardState extends State<PostCard> {
   @override
   Widget build(BuildContext context) {
     _width = MediaQuery.of(context).size.width;
-    return InkWell(
-      child: Center(
-        child: Container(
-          width: _width * 0.96,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(15.0),
+    return Container(
+      width: _width * 0.96,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: const [
+          BoxShadow(color: Colors.black45, blurRadius: 2, offset: Offset(1, 2)),
+        ],
+      ),
+      child: Column(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(6.0),
             child: Container(
                 decoration: BoxDecoration(
-                    color: _theme.tertiaryColor.withOpacity(0.15),
-                    borderRadius: BorderRadius.circular(15.0),
-                    border: Border.all(
-                        width: 1.5,
-                        color: _theme.tertiaryColor.withOpacity(0.4))),
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(12.0, 20.0, 12.0, 20.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      widget.image == "a"
-                          ? SizedBox()
-                          : Container(
-                              height: 400,
-                              width: 300,
-                              child: Image.network(widget.image)),
-                      _buildBookTitle(widget.postText),
-                      if (!widget.showName)
-                        _buildRichText("By: ", widget.authorName),
-                      _buildRichText("Likes: ", widget.likes.toString()),
-                      LikeButton(onTap: onLikeButtonTapped),
-                    ],
-                  ),
-                )),
+                  borderRadius: BorderRadius.circular(6.0),
+                ),
+                child: widget.image == "a"
+                    ? SizedBox()
+                    : Container(
+                        child: Image.network(
+                        widget.image,
+                        fit: BoxFit.contain,
+                      ))),
           ),
-        ),
+          const SizedBox(
+            height: 15,
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: _width * 0.03,
+              ),
+              _buildText("", widget.activityName, 20, FontWeight.bold),
+              const Spacer(),
+              Column(children: [
+                if (!widget.showName)
+                  _buildText("- ", widget.authorName, 14, FontWeight.normal),
+                Row(children: [
+                  _buildText(
+                      "", widget.likes.toString(), 16, FontWeight.normal),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  LikeButton(onTap: onLikeButtonTapped),
+                ]),
+              ]),
+              SizedBox(
+                width: _width * 0.03,
+              )
+            ],
+          ),
+          _buildText("", widget.postText, 16, FontWeight.normal),
+          const SizedBox(
+            height: 15,
+          ),
+        ],
       ),
-      onTap: () {},
     );
   }
 
@@ -97,32 +115,12 @@ class _PostCardState extends State<PostCard> {
         .update({'likes': widget.likes - 1});
   }
 
-  Widget _buildBookTitle(String bookTitle) {
+  Widget _buildText(
+      String s1, String bookTitle, double fontSize, FontWeight fontWeight) {
     return Text(
-      bookTitle,
-      textAlign: TextAlign.center,
-      style: const TextStyle(
-        fontSize: 22.0,
-        letterSpacing: 1,
-        fontWeight: FontWeight.bold,
-      ),
-    );
-  }
-
-  Widget _buildRichText(String text1, String text2) {
-    return RichText(
-      text: TextSpan(
-          text: text1,
-          style: TextStyle(
-            color: _theme.secondaryColor,
-            fontWeight: FontWeight.w600,
-          ),
-          children: <TextSpan>[
-            TextSpan(
-                text: text2,
-                style: const TextStyle(
-                    color: Colors.amber, fontWeight: FontWeight.w400)),
-          ]),
+      s1 + bookTitle,
+      style: TextStyle(
+          fontSize: fontSize, color: Colors.black, fontWeight: fontWeight),
     );
   }
 }
