@@ -40,16 +40,16 @@ class _PostCardState extends State<PostCard> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
         boxShadow: const [
-          BoxShadow(color: Colors.black45, blurRadius: 2, offset: Offset(1, 2)),
+          BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(1, 2)),
         ],
       ),
       child: Column(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(6.0),
+            borderRadius: BorderRadius.circular(10.0),
             child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6.0),
+                  borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: widget.image == "a"
                     ? SizedBox()
@@ -62,32 +62,39 @@ class _PostCardState extends State<PostCard> {
           const SizedBox(
             height: 15,
           ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: _width * 0.03,
-              ),
-              _buildText("", widget.activityName, 20, FontWeight.bold),
-              const Spacer(),
-              Column(children: [
-                if (!widget.showName)
-                  _buildText("- ", widget.authorName, 14, FontWeight.normal),
-                Row(children: [
-                  _buildText(
-                      "", widget.likes.toString(), 16, FontWeight.normal),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  LikeButton(onTap: onLikeButtonTapped),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 10, 15, 15),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                    width: _width * 0.6,
+                    child: _buildText(
+                        "", widget.activityName, 20, FontWeight.w600)),
+                const Spacer(),
+                Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                  if (!widget.showName)
+                    Container(
+                        alignment: Alignment.centerRight,
+                        width: _width * 0.2,
+                        child: _buildText(
+                            "- ", widget.authorName, 14, FontWeight.normal)),
+                  Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                    _buildText(
+                        "", widget.likes.toString(), 16, FontWeight.normal),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    LikeButton(onTap: onLikeButtonTapped),
+                  ]),
                 ]),
-              ]),
-              SizedBox(
-                width: _width * 0.03,
-              )
-            ],
+              ],
+            ),
           ),
-          _buildText("", widget.postText, 16, FontWeight.normal),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: _buildText("", widget.postText, 16, FontWeight.normal),
+          ),
           const SizedBox(
             height: 15,
           ),

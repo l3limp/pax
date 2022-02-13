@@ -52,7 +52,7 @@ class _MainHomeState extends State<MainHome> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.people_rounded), label: "Comminity")
+              icon: Icon(Icons.people_rounded), label: "Community")
         ],
       ),
       body: PageView(
