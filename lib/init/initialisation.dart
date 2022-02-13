@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pax/screens/home.dart';
 import 'package:pax/screens/login.dart';
+import 'package:pax/screens/main_home.dart';
 
 class Initialising extends StatefulWidget {
   const Initialising({Key? key}) : super(key: key);
@@ -27,7 +28,7 @@ class _InitialisingState extends State<Initialising> {
                 final FirebaseAuth _auth = FirebaseAuth.instance;
                 _user = _auth.currentUser;
                 if (_user != null) {
-                  return const HomeScreen();
+                  return const MainHome();
                 } else {
                   return const LoginPage();
                 }
