@@ -84,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         _user!.email!.split("@")[0],
                         style: const TextStyle(
                             color: Colors.black,
-                            fontSize: 40.0,
+                            fontSize: 35.0,
                             fontWeight: FontWeight.w600),
                       ),
                       InkWell(
