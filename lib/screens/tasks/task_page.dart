@@ -136,7 +136,7 @@ class _TasksPageState extends State<TasksPage> {
                 children: [
                   ElevatedButton(
                       onPressed: () async {
-                        int number = _random.nextInt(6);
+                        int number = _random.nextInt(7);
                         await setTask(number);
                         updateScreen(number);
                       },
