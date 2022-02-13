@@ -34,7 +34,6 @@ class _AddRoutineState extends State<AddRoutine> {
             ),
             ElevatedButton(
                 onPressed: () {
-                  print(routineText);
                   _setRoutine();
                 },
                 child: const Text("Add the routine"))
@@ -49,6 +48,7 @@ class _AddRoutineState extends State<AddRoutine> {
     String formattedDate = DateFormat('yMMMd').format(now);
     CollectionReference _posts =
         FirebaseFirestore.instance.collection('routines');
+    Navigator.pop(context);
     return _posts
         .doc(_user!.uid)
         .collection('userroutines')

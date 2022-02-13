@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CheckBoxList extends StatefulWidget {
-  const CheckBoxList({Key? key}) : super(key: key);
+  final String routine;
+  final String date;
+  const CheckBoxList({Key? key, required this.routine, required this.date})
+      : super(key: key);
 
   @override
   _CheckBoxListState createState() => _CheckBoxListState();
@@ -22,13 +25,10 @@ class _CheckBoxListState extends State<CheckBoxList> {
           data: ThemeData(unselectedWidgetColor: Colors.black),
           child: CheckboxListTile(
             controlAffinity: ListTileControlAffinity.leading,
-            title: const Text(
-              "This is a checkbox",
-              style: TextStyle(color: Colors.black),
-            ),
-            subtitle: const Text(
-              "This is a subtitle for the checkbox",
-              style: TextStyle(color: Colors.black),
+            title: Text(widget.routine, style: const TextStyle(color: Colors.black),),
+            subtitle: Text(
+              widget.date,
+              style: const TextStyle(color: Colors.black),
             ),
             activeColor: Colors.green,
             checkColor: Colors.white,
